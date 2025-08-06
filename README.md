@@ -49,6 +49,43 @@ AdmyBrand is a cutting-edge marketing platform that combines modern web technolo
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Email**: [Resend](https://resend.com/)
 
+## 🤖 AI Usage Report
+
+This project leveraged various AI tools throughout its development lifecycle to enhance productivity, ensure code quality, and implement modern web development practices. Below is a summary of how AI was utilized:
+
+### 🧠 AI Tools Used
+
+| Tool | Purpose | Key Contributions |
+|------|---------|-------------------|
+| **ChatGPT** | Task Scheduling & Planning | - Project planning and task breakdown<br>- Code structure recommendations<br>- Debugging assistance |
+| **Perplexity** | Research & Documentation | - Latest web development trends<br>- Best practices for Next.js 14<br>- Performance optimization techniques |
+| **GitHub Copilot** | Code Assistance | - Code completions and suggestions<br>- Component refactoring<br>- Documentation generation |
+| **Windsurf** | Development & Debugging | - Real-time coding assistance<br>- Error diagnosis and fixes<br>- Implementation guidance |
+
+### 📊 AI Impact on Development
+
+1. **Accelerated Development**
+   - Rapid prototyping of UI components
+   - Efficient implementation of complex animations
+   - Quick resolution of technical challenges
+
+2. **Code Quality**
+   - Consistent code style and patterns
+   - Identification of potential bugs and anti-patterns
+   - Performance optimization suggestions
+
+3. **Knowledge Enhancement**
+   - On-demand access to best practices
+   - Learning modern React patterns
+   - Staying updated with latest web standards
+
+4. **Documentation**
+   - Auto-generated code comments
+   - README and documentation improvements
+   - Clear API documentation
+
+This project demonstrates how AI can be effectively integrated into the development workflow to boost productivity while maintaining high code quality standards.
+
 ### Developer Tools
 - **Linting**: [ESLint](https://eslint.org/)
 - **Formatting**: [Prettier](https://prettier.io/)
