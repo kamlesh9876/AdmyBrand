@@ -140,11 +140,6 @@ AdmyBrand is a cutting-edge marketing platform that combines modern web technolo
    yarn start
    ```
 
-### Deployment
-
-Deploy your own version of AdmyBrand with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fadmybrand)
 
 ## 📖 Documentation
 
@@ -236,18 +231,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Kamlesh Kumar**
+**Kamlesh Pawar**
 
-- Website: [yourwebsite.com](https://yourwebsite.com)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourusername)
-- Twitter: [@yourusername](https://twitter.com/yourusername)
+- Website: [yourwebsite.com](https://kamlesh-pawar.netlify.app/)
+- GitHub: [@yourusername](https://github.com/kamlesh9876)
+- LinkedIn: [Your Name](https://www.linkedin.com/in/kamlesh-pawar-3871552b5/)
 
 ## 🔗 Links
 
-- [Live Demo](https://admybrand.vercel.app)
-- [GitHub Repository](https://github.com/yourusername/admybrand)
-- [Issue Tracker](https://github.com/yourusername/admybrand/issues)
+- [Live Demo](aipowertools.netlify.app)
 
 ## ✨ Show Your Support
 
