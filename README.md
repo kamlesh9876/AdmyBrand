@@ -233,9 +233,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Kamlesh Pawar**
 
-- Website: [yourwebsite.com](https://kamlesh-pawar.netlify.app/)
-- GitHub: [@yourusername](https://github.com/kamlesh9876)
-- LinkedIn: [Your Name](https://www.linkedin.com/in/kamlesh-pawar-3871552b5/)
+- Website: [kamlesh-pawar.com](https://kamlesh-pawar.netlify.app/)
+- GitHub: [@kamlesh9876](https://github.com/kamlesh9876)
+- LinkedIn: [kamlesh pawar](https://www.linkedin.com/in/kamlesh-pawar-3871552b5/)
 
 ## 🔗 Links
 
