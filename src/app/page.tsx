@@ -1,103 +1,138 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+
+// Add IDs to each section for navigation
+const sections = [
+  { id: 'hero', component: 'Hero' },
+  { id: 'features', component: 'Features' },
+  { id: 'pricing', component: 'Pricing' },
+  { id: 'testimonials', component: 'Testimonials' },
+  { id: 'faq', component: 'FAQ' },
+  { id: 'cta', component: 'CTA' },
+];
+
+// Dynamically import components with loading states
+const components = sections.reduce((acc, { component, id }) => {
+  acc[component] = dynamic(
+    () => import(`@/app/(marketing)/components/${component}`).then(mod => {
+      const Comp = mod[component] || mod.default;
+      // Wrap each component with a section that has an ID
+      return (props: any) => (
+        <section id={id.toLowerCase()} className="scroll-mt-20">
+          <Comp {...props} />
+        </section>
+      );
+    }),
+    { 
+      ssr: false, 
+      loading: () => <div className="min-h-screen" /> 
+    }
+  );
+  return acc;
+}, {} as Record<string, any>);
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  // Add smooth scrolling behavior
+  useEffect(() => {
+    // Check if we're in the browser
+    if (typeof window !== 'undefined') {
+      // Smooth scroll behavior for anchor links
+      const handleAnchorClick = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
+        const anchor = target.closest('a[href^="#"]') as HTMLAnchorElement;
+        
+        if (anchor) {
+          e.preventDefault();
+          const targetId = anchor.getAttribute('href');
+          if (!targetId || targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            const headerOffset = 80; // Height of header
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      };
+
+      // Add event listener to the document
+      document.addEventListener('click', handleAnchorClick);
+
+      // Cleanup
+      return () => {
+        document.removeEventListener('click', handleAnchorClick);
+      };
+    }
+  }, []);
+
+  // Handle navigation dot clicks
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  return (
+    <div className="relative">
+      {/* Scroll progress indicator */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 origin-left z-50" 
+        style={{ scaleX }}
+      />
+
+      {/* Navigation */}
+      <nav className="fixed top-1/2 right-4 transform -translate-y-1/2 z-40">
+        <div className="flex flex-col space-y-4">
+          {sections.map(({ id }) => (
+            <button
+              key={id}
+              onClick={() => scrollToSection(id)}
+              className="w-3 h-3 rounded-full bg-gray-300 hover:bg-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label={`Scroll to ${id} section`}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </nav>
+
+      {/* Main content */}
+      <div className="w-full">
+        {sections.map(({ component, id }) => {
+          const Component = components[component];
+          return (
+            <div 
+              key={id} 
+              id={id}
+              className="scroll-mt-20"
+            >
+              <Component />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
