@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -104,7 +104,7 @@ export default function DemoPage() {
                     {presets.map((preset, index) => (
                       <Button
                         key={preset.name}
-                        variant={settings.currentPreset === index ? 'default' : 'outline'}
+                        variant={settings.currentPreset === index ? 'primary' : 'outline'}
                         size="sm"
                         onClick={() =>
                           setSettings({ ...settings, currentPreset: index })
